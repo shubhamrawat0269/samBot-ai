@@ -1,7 +1,7 @@
 import Sidebar from "./components/Sidebar";
 import Workspace from "./components/Workspace";
 
-export function App() {
+function App() {
   return (
     <div className="">
       {/* Sidebar  */}
@@ -11,3 +11,5 @@ export function App() {
     </div>
   );
 }
+
+export default App;
