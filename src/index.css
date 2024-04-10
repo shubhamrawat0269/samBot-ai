@@ -1,3 +1,11 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.h-size-of-screen {
+    height: 93%;
+}
+
+.h-size-of-wrkspace {
+    height: 75%;
+}
