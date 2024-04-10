@@ -1,13 +1,47 @@
 import { useState } from "preact/hooks";
-// import { sendMsgToOpenAI } from "../openai";
 
-const WorkspaceForm = () => {
+const WorkspaceForm = ({ msgList, dispatch, dispatchError }) => {
   const [text, setText] = useState("");
 
-  const handleSendMsgToOpenAI = () => {
-    console.log(text);
-    // const res = await sendMsgToOpenAI(text);
-    // console.log(res);
+  const handleSendMsgToOpenAI = async () => {
+    // console.log(text);
+    const url = `https://api.openai.com/v1/chat/completions`;
+    const openAiAPI = "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";
+
+    let model = `gpt-3.5-turbo`;
+    let token = `Bearer ${openAiAPI}`;
+
+    let msgToSend = [
+      ...msgList,
+      {
+        role: "user",
+        content: text,
+      },
+    ];
+
+    let res = await fetch(url, {
+      method: "POST",
+      headers: {
+        Authorization: token,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        model: model,
+        messages: msgToSend,
+      }),
+    });
+
+    let resInJSON = await res.json();
+
+    if (resInJSON.choices) {
+      // console.log(resInJSON);
+      let newAllMsg = [...msgToSend, resInJSON.choices[0].message];
+      // console.log(newAllMsg);
+      dispatch(newAllMsg);
+    } else {
+      dispatchError(resInJSON.error.message);
+    }
+
     setText("");
   };
 
