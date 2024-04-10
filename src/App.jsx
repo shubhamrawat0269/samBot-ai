@@ -3,11 +3,13 @@ import Workspace from "./components/Workspace";
 
 function App() {
   return (
-    <div className="md:flex md:items-center h-screen">
+    <div className="w-screen h-screen md:flex md:items-center">
+      {/* <div className="md:flex md:items-center"> */}
       {/* Sidebar Panel  */}
       <Panel />
       {/* Workspace  */}
       <Workspace />
+      {/* </div> */}
     </div>
   );
 }

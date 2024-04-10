@@ -1,22 +1,37 @@
-import React from "react";
+import { useState } from "preact/hooks";
+// import { sendMsgToOpenAI } from "../openai";
 
 const WorkspaceForm = () => {
+  const [text, setText] = useState("");
+
+  const handleSendMsgToOpenAI = () => {
+    console.log(text);
+    // const res = await sendMsgToOpenAI(text);
+    // console.log(res);
+    setText("");
+  };
+
   return (
-    <form className="flex flex-col gap-4 pt-4 md:flex-row md:gap-0 md:justify-around">
+    <div className="flex flex-col gap-2 pt-4 md:flex-row md:justify-center md:items-center md:h-1/6">
       <input
         type="text"
-        className="p-2 w-5/6 m-auto md:w-5/6"
+        value={text}
+        className="w-5/6 h-10 p-4 outline-none m-auto md:m-0"
+        onChange={(e) => setText(e.target.value)}
         placeholder="Type Here..."
       />
-      <div className="flex flex-col md:flex-row gap-2">
-        <button className="bg-gray-700 text-white py-2 px-5 w-5/6 m-auto md:w-4/6 md:m-0 md:rounded-lg">
+      <div className="flex flex-col md:flex-row md:justify-center md:items-center gap-2">
+        <button
+          onClick={handleSendMsgToOpenAI}
+          className="bg-gray-700 text-white py-2 px-5 w-5/6 m-auto md:w-4/6 md:m-0 md:rounded-lg"
+        >
           Ask
         </button>
         <button className="bg-gray-700 text-white py-2 w-5/6 m-auto px-5 md:w-4/6 md:m-0 md:rounded-lg">
           Save
         </button>
       </div>
-    </form>
+    </div>
   );
 };
 
