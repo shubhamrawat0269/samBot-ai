@@ -4,17 +4,12 @@ import WorkspaceContent from "./WorkspaceContent";
 import { useState } from "preact/hooks";
 
 const Workspace = () => {
-  const [error, setError] = useState("");
-  const [allMessages, setAllMessages] = useState([]);
+  const [message, setMessage] = useState([]);
 
   return (
     <div className="md:w-5/6 bg-gray-300 h-size-of-screen md:h-full">
-      <WorkspaceContent messages={allMessages} error={error} />
-      <WorkspaceForm
-        msgList={allMessages}
-        dispatch={setAllMessages}
-        dispatchError={setError}
-      />
+      <WorkspaceContent message={message} />
+      <WorkspaceForm msgList={message} dispatch={setMessage} />
     </div>
   );
 };
